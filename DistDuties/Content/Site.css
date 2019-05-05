@@ -1,0 +1,78 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+    padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.bg-custom {
+    background-color: #FFEB00;
+    box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(59,64,69,0.1);
+    font-size: 16px;
+}
+
+.welcome-main {
+    color: #fff;
+    background-image: url("https://blackrockdigital.github.io/startbootstrap-agency/img/header-bg.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+    padding: 300px 0px;
+}
+
+.btn-custom:hover {
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.52);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.52);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.52);
+    color: #212529;
+    text-decoration: none;
+}
+
+.btn-custom {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #F5F5F5;
+}
+
+.btn {
+    padding: 10px 20px;
+}
+
+.create-btn {
+    color: #000;
+    font-size: 28px;
+    font-weight: lighter;
+    background-color: #FFEB00;
+}
+
+.heading-title {
+    word-spacing: 2px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.project-title {
+    margin-bottom: 30px;
+}
+
+.main-footer {
+    padding: 16px 0px;
+    background-color: #2D2D2B;
+    color: #fff;
+}
