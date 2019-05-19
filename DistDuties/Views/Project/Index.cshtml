@@ -1,16 +1,38 @@
-﻿
+﻿@model  IEnumerable<DistDuties.Models.Project>
+
 @{
     ViewBag.Title = "Index";
 }
 
-<div class="welcome-main">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="project-title heading-title">Welcome to DD Service</div>
-                @Html.ActionLink("Create Project", "Create", "Project", new { @class = "create-btn btn-custom" })
-            </div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @ViewBag.userID
+            <h2>My projects</h2>
+            @foreach (var project in Model)
+            {
+
+                <div class="project-list">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                @Html.ActionLink($"{project.Name}", "Info", "Project", routeValues: new { id = project.ProjectID }, htmlAttributes: new { @class = "" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.DisplayFor(a => project.CreatorEmail)
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+
         </div>
+        
     </div>
 </div>
+
 

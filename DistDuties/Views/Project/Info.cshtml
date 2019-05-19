@@ -1,0 +1,97 @@
+﻿@model DistDuties.Models.Project
+
+@using DistDuties.Models
+
+@{
+    ViewBag.Title = "Info";
+
+
+
+
+
+}
+
+
+<div class="project-inner">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-2 p-0">
+                <div class="project-users text-center">
+                    <p>Active users</p>
+
+                    <div class="users-list" id="user-list">
+                        <ul>
+                            @foreach (var item in ViewBag.temMates)
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                    </div>
+
+                    @if (Model.CreatorEmail == User.Identity.Name)
+                    {
+                        <div class="user-controls">
+                            <p>User controls</p>
+                            @using (Html.BeginForm("FindUser", "Manage", FormMethod.Post))
+                            {
+                                <input type="email" id="userEmail" name="email" placeholder="User email" />
+
+                                <input type="submit" value="Add" name="userControl" />
+                                <input type="submit" value="Delete" name="userControl" />
+
+                                <input type="hidden" name="projectId" value="@Model.ProjectID" />
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-10 p-0">
+
+                <div class="project-info">
+                    <div class="project-name">
+                        <span>@Model.Name</span>
+                        @if (Model.CreatorEmail == User.Identity.Name)
+                        {<span>@Html.ActionLink("Create task", "Create", "Tasko", new { projectId = Model.ProjectID }, new { @class = "create-task-link" })</span>}
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p>Something else</p>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="project-tasks">
+                                <p>Tasks</p>
+                                @foreach (ProjectTask item in ViewBag.projectTasks)
+                                {
+                                    <div class="project-task">
+                                        <div class="task-name">
+                                            Title:<span> @item.TaskName</span> 
+                                        </div>
+                                        <div class="task-status">
+                                            Status:<span> @item.Status</span> 
+                                        </div>
+                                        <div class="task-user">
+                                            Task perfomer: <span> @item.TeamMateEmail </span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@if (Model.CreatorEmail == User.Identity.Name)
+{
+    @Scripts.Render("~/Scripts/user-select.js")
+}
+

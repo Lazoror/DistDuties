@@ -7,13 +7,13 @@ namespace DistDuties.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class EmailTypeLoginView : IMigrationMetadata
+    public sealed partial class UnsetAutoGenerationId : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(EmailTypeLoginView));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UnsetAutoGenerationId));
         
         string IMigrationMetadata.Id
         {
-            get { return "201904251303121_EmailTypeLoginView"; }
+            get { return "201905141228455_UnsetAutoGenerationId"; }
         }
         
         string IMigrationMetadata.Source

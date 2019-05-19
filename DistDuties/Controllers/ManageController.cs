@@ -322,6 +322,13 @@ namespace DistDuties.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        public string GetUserIdByEmail(string email)
+        {
+            var user = UserManager.FindByEmail(email);
+
+            return user.Id;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -331,6 +338,20 @@ namespace DistDuties.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        public ActionResult FindUser(string email, int projectId, string userControl)
+        {
+            var user = UserManager.FindByEmail(email);
+
+            if(user == null)
+            {
+                return View("~/Views/Shared/Error.cshtml");
+            }
+
+            string userId = user.Id;
+
+            return RedirectToAction("UserControls", "Project", new { userId = userId, email = email, projectId = projectId, userControl = userControl });
         }
 
 #region Helpers

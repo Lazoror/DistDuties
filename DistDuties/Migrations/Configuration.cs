@@ -5,15 +5,15 @@ namespace DistDuties.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DistDuties.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DistDuties.DAL.DistContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "DistDuties.Models.ApplicationDbContext";
+            ContextKey = "DistDuties.DAL.DistContext";
         }
 
-        protected override void Seed(DistDuties.Models.ApplicationDbContext context)
+        protected override void Seed(DistDuties.DAL.DistContext context)
         {
             //  This method will be called after migrating to the latest version.
 

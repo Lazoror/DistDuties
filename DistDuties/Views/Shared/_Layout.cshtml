@@ -10,47 +10,42 @@
 
 </head>
 <body>
-    <div class="all-content">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-custom">
-            <div class="container">
-                @Html.ActionLink("Bohdanio Prod", "Index", "Project", new { area = "" }, new { @class = "navbar-brand" })
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            @Html.ActionLink("Home", "Index", "Project", new { }, new { @class = "nav-link" })
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
-                    </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-custom">
+        <div class="container">
+            @Html.ActionLink("Bohdanio Prod", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    @Html.Partial("_LoginPartial")
-                </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Project
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("Create project", "Create", "Project", new { }, new { @class = "dropdown-item" })
+                            
+                            <div class="dropdown-divider"></div>
+                            
+                        </div>
+                    </li>
+                </ul>
+
+                @Html.Partial("_LoginPartial")
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        @RenderBody()
 
-        <footer class="main-footer">
+    @RenderBody()
+
+    @*<footer class="main-footer">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
@@ -58,8 +53,10 @@
                     </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </footer>*@
+
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

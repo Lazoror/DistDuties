@@ -12,6 +12,7 @@ namespace DistDuties.DAL
         public DistContext() : base("DistContext") { }
 
         public DbSet<Project> Projects { get; set; }
-
+        public DbSet<TeamMate> TeamMates { get; set; }
+        public DbSet<ProjectTask> Tasks { get; set; }
     }
 }

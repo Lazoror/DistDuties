@@ -1,7 +1,6 @@
 ﻿body {
     padding: 0;
     margin: 0;
-    padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -25,14 +24,18 @@ textarea {
     font-size: 16px;
 }
 
+
+
 .welcome-main {
+    display: flex;
+    align-items: center;
     color: #fff;
     background-image: url("https://blackrockdigital.github.io/startbootstrap-agency/img/header-bg.jpg");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
     background-size: cover;
-    padding: 300px 0px;
+    height: calc(100vh - 56px);
 }
 
 .btn-custom:hover {
@@ -76,3 +79,70 @@ textarea {
     background-color: #2D2D2B;
     color: #fff;
 }
+
+.project-list {
+    display: flex;
+    flex-direction: row;
+    background-color: #F1F1F1;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.project-list span {
+    padding: 0 10px;
+}
+
+.project-users {
+    background-color: #F1F1F1;
+    padding: 5px 0;
+    height: calc(100vh - 56px);
+}
+
+.project-users p {
+    font-size: 18px;
+    position: relative;
+}
+
+.project-info {
+    -webkit-box-shadow: 0px 4px 4px -4px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0px 4px 4px -4px rgba(0,0,0,0.33);
+    box-shadow: 0px 4px 4px -4px rgba(0,0,0,0.33);
+    padding: 8px;
+}
+
+.users-list ul{
+    padding: 0;
+}
+
+.users-list ul > li {
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.users-list ul li:hover {
+    background-color: #cecece;
+}
+
+.user-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+}
+
+.project-task > div {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.project-task {
+    padding: 10px;
+    background-color: #F1F1F1;
+    margin-bottom: 10px;
+}
+
+.task-name span, .task-user span, .task-status span{
+    font-weight: bold;
+    font-size: 16px;
+}
+

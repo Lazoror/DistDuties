@@ -7,13 +7,13 @@ namespace DistDuties.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class AddUserID : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUserID));
         
         string IMigrationMetadata.Id
         {
-            get { return "201904171200440_InitialCreate"; }
+            get { return "201905141238341_AddUserID"; }
         }
         
         string IMigrationMetadata.Source

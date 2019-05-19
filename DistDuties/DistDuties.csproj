@@ -171,19 +171,61 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\TaskoController.cs" />
     <Compile Include="DAL\DistContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904171200440_InitialCreate.cs" />
-    <Compile Include="Migrations\201904171200440_InitialCreate.Designer.cs">
-      <DependentUpon>201904171200440_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201905121036191_InitialCreate.cs" />
+    <Compile Include="Migrations\201905121036191_InitialCreate.Designer.cs">
+      <DependentUpon>201905121036191_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904251303121_EmailTypeLoginView.cs" />
-    <Compile Include="Migrations\201904251303121_EmailTypeLoginView.Designer.cs">
-      <DependentUpon>201904251303121_EmailTypeLoginView.cs</DependentUpon>
+    <Compile Include="Migrations\201905121231142_Initial.cs" />
+    <Compile Include="Migrations\201905121231142_Initial.Designer.cs">
+      <DependentUpon>201905121231142_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905132021245_AddTeamMateEntity.cs" />
+    <Compile Include="Migrations\201905132021245_AddTeamMateEntity.Designer.cs">
+      <DependentUpon>201905132021245_AddTeamMateEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905141228455_UnsetAutoGenerationId.cs" />
+    <Compile Include="Migrations\201905141228455_UnsetAutoGenerationId.Designer.cs">
+      <DependentUpon>201905141228455_UnsetAutoGenerationId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905141238341_AddUserID.cs" />
+    <Compile Include="Migrations\201905141238341_AddUserID.Designer.cs">
+      <DependentUpon>201905141238341_AddUserID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905141254508_AddMateEmail.cs" />
+    <Compile Include="Migrations\201905141254508_AddMateEmail.Designer.cs">
+      <DependentUpon>201905141254508_AddMateEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905181137136_AddTaskModel.cs" />
+    <Compile Include="Migrations\201905181137136_AddTaskModel.Designer.cs">
+      <DependentUpon>201905181137136_AddTaskModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905191305525_addTeamMateIdToProjectTask.cs" />
+    <Compile Include="Migrations\201905191305525_addTeamMateIdToProjectTask.Designer.cs">
+      <DependentUpon>201905191305525_addTeamMateIdToProjectTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905191326464_AddedRequiredTagsToProjectTaskModel.cs" />
+    <Compile Include="Migrations\201905191326464_AddedRequiredTagsToProjectTaskModel.Designer.cs">
+      <DependentUpon>201905191326464_AddedRequiredTagsToProjectTaskModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905191333270_AddedUserEmailToProjectTaskModel.cs" />
+    <Compile Include="Migrations\201905191333270_AddedUserEmailToProjectTaskModel.Designer.cs">
+      <DependentUpon>201905191333270_AddedUserEmailToProjectTaskModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905191837016_AddedStatusForTask.cs" />
+    <Compile Include="Migrations\201905191837016_AddedStatusForTask.Designer.cs">
+      <DependentUpon>201905191837016_AddedStatusForTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905192113364_AddedLenghtFilterForTaskName.cs" />
+    <Compile Include="Migrations\201905192113364_AddedLenghtFilterForTaskName.Designer.cs">
+      <DependentUpon>201905192113364_AddedLenghtFilterForTaskName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -244,6 +286,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\user-select.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -275,7 +318,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -285,6 +328,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\Info.cshtml" />
+    <Content Include="Views\Tasko\Index.cshtml" />
+    <Content Include="Views\Tasko\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -301,11 +349,41 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904171200440_InitialCreate.resx">
-      <DependentUpon>201904171200440_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905121036191_InitialCreate.resx">
+      <DependentUpon>201905121036191_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904251303121_EmailTypeLoginView.resx">
-      <DependentUpon>201904251303121_EmailTypeLoginView.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905121231142_Initial.resx">
+      <DependentUpon>201905121231142_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905132021245_AddTeamMateEntity.resx">
+      <DependentUpon>201905132021245_AddTeamMateEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905141228455_UnsetAutoGenerationId.resx">
+      <DependentUpon>201905141228455_UnsetAutoGenerationId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905141238341_AddUserID.resx">
+      <DependentUpon>201905141238341_AddUserID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905141254508_AddMateEmail.resx">
+      <DependentUpon>201905141254508_AddMateEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905181137136_AddTaskModel.resx">
+      <DependentUpon>201905181137136_AddTaskModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191305525_addTeamMateIdToProjectTask.resx">
+      <DependentUpon>201905191305525_addTeamMateIdToProjectTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191326464_AddedRequiredTagsToProjectTaskModel.resx">
+      <DependentUpon>201905191326464_AddedRequiredTagsToProjectTaskModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191333270_AddedUserEmailToProjectTaskModel.resx">
+      <DependentUpon>201905191333270_AddedUserEmailToProjectTaskModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905191837016_AddedStatusForTask.resx">
+      <DependentUpon>201905191837016_AddedStatusForTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905192113364_AddedLenghtFilterForTaskName.resx">
+      <DependentUpon>201905192113364_AddedLenghtFilterForTaskName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
