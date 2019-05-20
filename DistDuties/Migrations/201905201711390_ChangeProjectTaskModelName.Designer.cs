@@ -7,13 +7,13 @@ namespace DistDuties.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddMateEmail : IMigrationMetadata
+    public sealed partial class ChangeProjectTaskModelName : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddMateEmail));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeProjectTaskModelName));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905141254508_AddMateEmail"; }
+            get { return "201905201711390_ChangeProjectTaskModelName"; }
         }
         
         string IMigrationMetadata.Source

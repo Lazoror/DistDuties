@@ -8,7 +8,7 @@ using DistDuties.Models;
 
 namespace DistDuties.Controllers
 {
-    public class TaskoController : Controller
+    public class TicketController : Controller
     {
 
         private DistContext db = new DistContext();
@@ -45,29 +45,29 @@ namespace DistDuties.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ProjectTask projectTask)
+        public ActionResult Create(Ticket ticket)
         {
             if (ModelState.IsValid)
             {
-                TeamMate teamMate = db.TeamMates.FirstOrDefault(a => a.Email == projectTask.TeamMateEmail && a.ProjectID == projectTask.ProjectID);
+                TeamMate teamMate = db.TeamMates.FirstOrDefault(a => a.Email == ticket.TeamMateEmail && a.ProjectID == ticket.ProjectID);
 
                 if(teamMate != null)
                 {
-                    if (projectTask.ProjectID == teamMate.ProjectID)
+                    if (ticket.ProjectID == teamMate.ProjectID)
                     {
-                        projectTask.TeamMateID = teamMate.TeamMateID;
-                        projectTask.Status = TaskStatus.New;
-                        db.Tasks.Add(projectTask);
+                        ticket.TeamMateID = teamMate.TeamMateID;
+                        ticket.Status = TaskStatus.New;
+                        db.Tickets.Add(ticket);
                         db.SaveChanges();
 
-                        return RedirectToAction("Info", "Project", new { id = projectTask.ProjectID });
+                        return RedirectToAction("Info", "Project", new { id = ticket.ProjectID });
                     }
                 }
 
                 return View("~/Views/Shared/Error.cshtml");
             }
 
-            return View(projectTask);
+            return View(ticket);
         }
     }
 }

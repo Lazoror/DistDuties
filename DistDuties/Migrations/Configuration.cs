@@ -10,7 +10,6 @@ namespace DistDuties.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "DistDuties.DAL.DistContext";
         }
 
         protected override void Seed(DistDuties.DAL.DistContext context)

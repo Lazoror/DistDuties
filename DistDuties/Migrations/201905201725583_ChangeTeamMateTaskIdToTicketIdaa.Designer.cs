@@ -7,13 +7,13 @@ namespace DistDuties.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddedRequiredTagsToProjectTaskModel : IMigrationMetadata
+    public sealed partial class ChangeTeamMateTaskIdToTicketIdaa : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedRequiredTagsToProjectTaskModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeTeamMateTaskIdToTicketIdaa));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905191326464_AddedRequiredTagsToProjectTaskModel"; }
+            get { return "201905201725583_ChangeTeamMateTaskIdToTicketIdaa"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,13 +7,13 @@ namespace DistDuties.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddedStatusForTask : IMigrationMetadata
+    public sealed partial class DeletedPropertyFromTeamMate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedStatusForTask));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DeletedPropertyFromTeamMate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905191837016_AddedStatusForTask"; }
+            get { return "201905201737266_DeletedPropertyFromTeamMate"; }
         }
         
         string IMigrationMetadata.Source

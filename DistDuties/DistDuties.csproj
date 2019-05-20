@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -160,9 +163,6 @@
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -174,58 +174,38 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
-    <Compile Include="Controllers\TaskoController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="DAL\DistContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905121036191_InitialCreate.cs" />
-    <Compile Include="Migrations\201905121036191_InitialCreate.Designer.cs">
-      <DependentUpon>201905121036191_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201905201644520_Initial.cs" />
+    <Compile Include="Migrations\201905201644520_Initial.Designer.cs">
+      <DependentUpon>201905201644520_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905121231142_Initial.cs" />
-    <Compile Include="Migrations\201905121231142_Initial.Designer.cs">
-      <DependentUpon>201905121231142_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201905201711390_ChangeProjectTaskModelName.cs" />
+    <Compile Include="Migrations\201905201711390_ChangeProjectTaskModelName.Designer.cs">
+      <DependentUpon>201905201711390_ChangeProjectTaskModelName.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905132021245_AddTeamMateEntity.cs" />
-    <Compile Include="Migrations\201905132021245_AddTeamMateEntity.Designer.cs">
-      <DependentUpon>201905132021245_AddTeamMateEntity.cs</DependentUpon>
+    <Compile Include="Migrations\201905201724456_ChangeTeamMateTaskIdToTicketId.cs" />
+    <Compile Include="Migrations\201905201724456_ChangeTeamMateTaskIdToTicketId.Designer.cs">
+      <DependentUpon>201905201724456_ChangeTeamMateTaskIdToTicketId.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905141228455_UnsetAutoGenerationId.cs" />
-    <Compile Include="Migrations\201905141228455_UnsetAutoGenerationId.Designer.cs">
-      <DependentUpon>201905141228455_UnsetAutoGenerationId.cs</DependentUpon>
+    <Compile Include="Migrations\201905201725583_ChangeTeamMateTaskIdToTicketIdaa.cs" />
+    <Compile Include="Migrations\201905201725583_ChangeTeamMateTaskIdToTicketIdaa.Designer.cs">
+      <DependentUpon>201905201725583_ChangeTeamMateTaskIdToTicketIdaa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905141238341_AddUserID.cs" />
-    <Compile Include="Migrations\201905141238341_AddUserID.Designer.cs">
-      <DependentUpon>201905141238341_AddUserID.cs</DependentUpon>
+    <Compile Include="Migrations\201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.cs" />
+    <Compile Include="Migrations\201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.Designer.cs">
+      <DependentUpon>201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905141254508_AddMateEmail.cs" />
-    <Compile Include="Migrations\201905141254508_AddMateEmail.Designer.cs">
-      <DependentUpon>201905141254508_AddMateEmail.cs</DependentUpon>
+    <Compile Include="Migrations\201905201737266_DeletedPropertyFromTeamMate.cs" />
+    <Compile Include="Migrations\201905201737266_DeletedPropertyFromTeamMate.Designer.cs">
+      <DependentUpon>201905201737266_DeletedPropertyFromTeamMate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905181137136_AddTaskModel.cs" />
-    <Compile Include="Migrations\201905181137136_AddTaskModel.Designer.cs">
-      <DependentUpon>201905181137136_AddTaskModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905191305525_addTeamMateIdToProjectTask.cs" />
-    <Compile Include="Migrations\201905191305525_addTeamMateIdToProjectTask.Designer.cs">
-      <DependentUpon>201905191305525_addTeamMateIdToProjectTask.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905191326464_AddedRequiredTagsToProjectTaskModel.cs" />
-    <Compile Include="Migrations\201905191326464_AddedRequiredTagsToProjectTaskModel.Designer.cs">
-      <DependentUpon>201905191326464_AddedRequiredTagsToProjectTaskModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905191333270_AddedUserEmailToProjectTaskModel.cs" />
-    <Compile Include="Migrations\201905191333270_AddedUserEmailToProjectTaskModel.Designer.cs">
-      <DependentUpon>201905191333270_AddedUserEmailToProjectTaskModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905191837016_AddedStatusForTask.cs" />
-    <Compile Include="Migrations\201905191837016_AddedStatusForTask.Designer.cs">
-      <DependentUpon>201905191837016_AddedStatusForTask.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905192113364_AddedLenghtFilterForTaskName.cs" />
-    <Compile Include="Migrations\201905192113364_AddedLenghtFilterForTaskName.Designer.cs">
-      <DependentUpon>201905192113364_AddedLenghtFilterForTaskName.cs</DependentUpon>
+    <Compile Include="Migrations\201905201747227_ChangedTaskNameToTicketName.cs" />
+    <Compile Include="Migrations\201905201747227_ChangedTaskNameToTicketName.Designer.cs">
+      <DependentUpon>201905201747227_ChangedTaskNameToTicketName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -331,8 +311,8 @@
     <Content Include="Views\Project\Create.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Info.cshtml" />
-    <Content Include="Views\Tasko\Index.cshtml" />
-    <Content Include="Views\Tasko\Create.cshtml" />
+    <Content Include="Views\Ticket\Index.cshtml" />
+    <Content Include="Views\Ticket\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -349,41 +329,26 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905121036191_InitialCreate.resx">
-      <DependentUpon>201905121036191_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905201644520_Initial.resx">
+      <DependentUpon>201905201644520_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905121231142_Initial.resx">
-      <DependentUpon>201905121231142_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905201711390_ChangeProjectTaskModelName.resx">
+      <DependentUpon>201905201711390_ChangeProjectTaskModelName.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905132021245_AddTeamMateEntity.resx">
-      <DependentUpon>201905132021245_AddTeamMateEntity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905201724456_ChangeTeamMateTaskIdToTicketId.resx">
+      <DependentUpon>201905201724456_ChangeTeamMateTaskIdToTicketId.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905141228455_UnsetAutoGenerationId.resx">
-      <DependentUpon>201905141228455_UnsetAutoGenerationId.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905201725583_ChangeTeamMateTaskIdToTicketIdaa.resx">
+      <DependentUpon>201905201725583_ChangeTeamMateTaskIdToTicketIdaa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905141238341_AddUserID.resx">
-      <DependentUpon>201905141238341_AddUserID.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.resx">
+      <DependentUpon>201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905141254508_AddMateEmail.resx">
-      <DependentUpon>201905141254508_AddMateEmail.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905201737266_DeletedPropertyFromTeamMate.resx">
+      <DependentUpon>201905201737266_DeletedPropertyFromTeamMate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905181137136_AddTaskModel.resx">
-      <DependentUpon>201905181137136_AddTaskModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905191305525_addTeamMateIdToProjectTask.resx">
-      <DependentUpon>201905191305525_addTeamMateIdToProjectTask.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905191326464_AddedRequiredTagsToProjectTaskModel.resx">
-      <DependentUpon>201905191326464_AddedRequiredTagsToProjectTaskModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905191333270_AddedUserEmailToProjectTaskModel.resx">
-      <DependentUpon>201905191333270_AddedUserEmailToProjectTaskModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905191837016_AddedStatusForTask.resx">
-      <DependentUpon>201905191837016_AddedStatusForTask.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905192113364_AddedLenghtFilterForTaskName.resx">
-      <DependentUpon>201905192113364_AddedLenghtFilterForTaskName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905201747227_ChangedTaskNameToTicketName.resx">
+      <DependentUpon>201905201747227_ChangedTaskNameToTicketName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

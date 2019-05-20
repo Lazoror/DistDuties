@@ -3,16 +3,16 @@ namespace DistDuties.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddMateEmail : DbMigration
+    public partial class DeletedPropertyFromTeamMate : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.TeamMates", "Email", c => c.String());
+            DropColumn("dbo.TeamMate", "TicketID");
         }
         
         public override void Down()
         {
-            DropColumn("dbo.TeamMates", "Email");
+            AddColumn("dbo.TeamMate", "TicketID", c => c.Int(nullable: false));
         }
     }
 }

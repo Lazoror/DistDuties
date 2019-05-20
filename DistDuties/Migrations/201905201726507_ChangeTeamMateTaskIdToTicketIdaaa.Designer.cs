@@ -7,13 +7,13 @@ namespace DistDuties.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class ChangeTeamMateTaskIdToTicketIdaaa : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeTeamMateTaskIdToTicketIdaaa));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905121036191_InitialCreate"; }
+            get { return "201905201726507_ChangeTeamMateTaskIdToTicketIdaaa"; }
         }
         
         string IMigrationMetadata.Source

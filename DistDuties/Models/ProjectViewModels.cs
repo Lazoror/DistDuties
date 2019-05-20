@@ -33,21 +33,20 @@ namespace DistDuties.Models
         public int TeamMateID { get; set; }
         public string UserID { get; set; }
         public int ProjectID { get; set; }
-        public int TaskID { get; set; }
         public string Email { get; set; }
 
         public virtual Project Project { get; set; }
-        public virtual ICollection<ProjectTask> Tasks { get; set; }
+        public virtual ICollection<Ticket> Tasks { get; set; }
     }
 
-    public class ProjectTask
+    public class Ticket
     {
         [Key]
-        public int TaskID { get; set; }
+        public int TicketID { get; set; }
 
         [StringLength(60)]
         [Required]
-        public string TaskName { get; set; }
+        public string TicketName { get; set; }
         public int ProjectID { get; set; }
         public int TeamMateID { get; set; }
         [Required]

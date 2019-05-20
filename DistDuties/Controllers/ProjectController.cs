@@ -67,6 +67,7 @@ namespace DistDuties.Controllers
         [Authorize]
         public ActionResult Info(int? id)
         {
+            string UserEmail = User.Identity.Name;
             bool isUserInProject = db.TeamMates.Any(a => a.ProjectID == id && a.Email == User.Identity.Name);
 
             if (isUserInProject)
@@ -74,7 +75,15 @@ namespace DistDuties.Controllers
                 var project = db.Projects.Find(id);
 
                 ViewBag.temMates = db.TeamMates.Where(a => a.ProjectID == id).Select(a => a.Email).ToList();
-                ViewBag.projectTasks = db.TeamMates.SelectMany(a => a.Tasks).Where(a => a.ProjectID == id).ToList();
+                if(project.CreatorEmail == UserEmail)
+                {
+                    ViewBag.Tickets = db.TeamMates.SelectMany(a => a.Tasks).Where(a => a.ProjectID == id).ToList();
+                }
+                else
+                {
+                    ViewBag.Tickets = db.TeamMates.SelectMany(a => a.Tasks).Where(a => a.ProjectID == id && a.TeamMateEmail == UserEmail).ToList();
+                }
+                
 
 
                 return View(project);
