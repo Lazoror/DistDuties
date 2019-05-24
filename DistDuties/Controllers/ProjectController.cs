@@ -6,19 +6,23 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DistDuties.DAL;
-using DistDuties.Models;
+using DataAccess.DAL;
+using DataAccess.DataControls;
+using DataAccess.Models;
 using Microsoft.AspNet.Identity;
 
 namespace DistDuties.Controllers
 {
+
+    [RoutePrefix("projects")]
     public class ProjectController : Controller
     {
-        private DistContext db;
+        private readonly ProjectControl projectControl = new ProjectControl();
+        private readonly TeamMateControl mateControl = new TeamMateControl();
 
         public ProjectController()
         {
-            db = new DistContext();
+            
         }
 
         [Authorize]
@@ -28,7 +32,7 @@ namespace DistDuties.Controllers
 
             ViewBag.userID = userID;
 
-            var projects = db.Projects.Where(a => a.TeamMates.Any(mate => mate.UserID == userID)).ToList();
+            var projects = projectControl.GetAllUserProjects(userID);
 
 
             return View(projects);
@@ -46,19 +50,13 @@ namespace DistDuties.Controllers
         {
             if (ModelState.IsValid)
             {
-                TeamMate teamMate = new TeamMate();
-
                 project.CreatorEmail = User.Identity.Name;
 
-                db.Projects.Add(project);
-                db.SaveChanges();
+                projectControl.AddProject(project);
+                projectControl.SaveChanges();
 
-                teamMate.ProjectID = project.ProjectID;
-                teamMate.UserID = User.Identity.GetUserId();
-                teamMate.Email = User.Identity.Name;
-                db.TeamMates.Add(teamMate);
-                db.SaveChanges();
-
+                TeamMate teamMate = mateControl.CreateMate(User.Identity.Name, project.ProjectID, User.Identity.GetUserId());
+                mateControl.AddTeamMateSave(teamMate);
             }
 
             return RedirectToAction("Index", "Project");
@@ -67,74 +65,63 @@ namespace DistDuties.Controllers
         [Authorize]
         public ActionResult Info(int? id)
         {
-            string UserEmail = User.Identity.Name;
-            bool isUserInProject = db.TeamMates.Any(a => a.ProjectID == id && a.Email == User.Identity.Name);
+            int projectId = id ?? -1;
 
+            string userEmail = User.Identity.Name;
+            bool isUserInProject = mateControl.IsUserTeamMate(projectId, userEmail);
+
+           
             if (isUserInProject)
             {
-                var project = db.Projects.Find(id);
+                Project project = projectControl.FindProjectById(projectId);
 
-                ViewBag.temMates = db.TeamMates.Where(a => a.ProjectID == id).Select(a => a.Email).ToList();
-                if(project.CreatorEmail == UserEmail)
+                ViewBag.temMates = projectControl.GetTeamMatesEmail(projectId);
+
+                if (project.CreatorEmail == userEmail)
                 {
-                    ViewBag.Tickets = db.TeamMates.SelectMany(a => a.Tasks).Where(a => a.ProjectID == id).ToList();
+                    ViewBag.Tickets = projectControl.GetAllTickets(projectId);
                 }
                 else
                 {
-                    ViewBag.Tickets = db.TeamMates.SelectMany(a => a.Tasks).Where(a => a.ProjectID == id && a.TeamMateEmail == UserEmail).ToList();
+                    ViewBag.Tickets = projectControl.GetUserTickets(projectId, userEmail);
                 }
                 
-
-
                 return View(project);
             }
 
             
-
             return RedirectToAction("Index", "Project");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
         [Authorize]
         public ActionResult UserControls(string email, string userId, int projectId, string userControl)
         {
             if (!String.IsNullOrEmpty(email))
             {
-                
 
                 if (userControl == "Delete")
                 {
-                    Project project = db.Projects.FirstOrDefault(a => a.ProjectID == projectId);
+                    Project project = projectControl.FindProjectById(projectId);
 
                     if(project.CreatorEmail != email)
                     {
-                        DeleteTeamMate(email, projectId);
+                        mateControl.DeleteTeamMate(email, projectId);
                     }
 
                 }
 
                 if (userControl == "Add")
                 {
-                    TeamMate teamMateFind = db.TeamMates.FirstOrDefault(a => a.ProjectID == projectId && a.UserID == userId);
+                    TeamMate teamMateFind = projectControl.GetMateProject(projectId, email);
+                    
 
                     if (teamMateFind == null)
                     {
-                        TeamMate teamMate = new TeamMate();
+                        TeamMate teamMate = mateControl.CreateMate(email, projectId, userId);
 
-                        teamMate.Email = email;
-                        teamMate.ProjectID = projectId;
-                        teamMate.UserID = userId;
+                        mateControl.AddTeamMateSave(teamMate);
 
-                        db.TeamMates.Add(teamMate);
-                        db.SaveChanges();
                     }
                 }
 
@@ -143,15 +130,6 @@ namespace DistDuties.Controllers
             return RedirectToAction("Info", new { id = projectId });
         }
 
-        private void DeleteTeamMate(string email, int projectId)
-        {
-            TeamMate teamMateFind = db.TeamMates.FirstOrDefault(a => a.ProjectID == projectId && a.Email == email);
-
-            if (teamMateFind != null)
-            {
-                db.TeamMates.Remove(teamMateFind);
-                db.SaveChanges();
-            }
-        }
+        
     }
 }

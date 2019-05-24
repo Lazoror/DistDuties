@@ -351,7 +351,7 @@ namespace DistDuties.Controllers
 
             string userId = user.Id;
 
-            return RedirectToAction("UserControls", "Project", new { userId = userId, email = email, projectId = projectId, userControl = userControl });
+            return RedirectToAction("UserControls", "Project", new { userId, email, projectId, userControl });
         }
 
 #region Helpers

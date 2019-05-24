@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace DistDuties.Models
+namespace DataAccess.Models
 {
     public enum TaskStatus
     {

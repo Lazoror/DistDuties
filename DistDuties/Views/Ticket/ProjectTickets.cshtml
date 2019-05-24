@@ -1,0 +1,38 @@
+﻿@using DataAccess.Models
+
+<div class="project-tasks">
+    <p>Tickets</p>
+
+    <div class="col-md-5 d-inline-block">
+        <span>Title</span>
+    </div>
+    <div class="col-md-2 d-inline-block">
+        <span>Status</span>
+    </div>
+    <div class="col-md-2 d-inline-block">
+        <span>Ticket perfomer</span>
+    </div>
+
+
+    @foreach (Ticket item in ViewBag.Tickets)
+    {
+        <div class="project-task">
+            <div class="col-md-5">
+                <div class="task-name">
+                    <span>@item.TicketName</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="task-status">
+                    <span>@item.Status</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="task-user">
+                    <span>@item.TeamMateEmail </span>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>

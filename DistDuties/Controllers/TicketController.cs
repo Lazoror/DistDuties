@@ -1,17 +1,16 @@
-﻿using DistDuties.DAL;
-using System;
+﻿using DataAccess.DAL;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using DistDuties.Models;
+using DataAccess.Models;
+using DataAccess.DataControls;
 
 namespace DistDuties.Controllers
 {
     public class TicketController : Controller
     {
-
-        private DistContext db = new DistContext();
+        private readonly ProjectControl projectControl = new ProjectControl();
+        private readonly TicketControl ticketControl = new TicketControl();
 
         // GET: Task
         public ActionResult Index()
@@ -22,19 +21,23 @@ namespace DistDuties.Controllers
         [Authorize]
         public ActionResult Create(int? projectId)
         {
+            int projectID = projectId ?? -1;
+
             if (projectId != null)
             {
-                bool isProjectExists = db.Projects.Any(a => a.ProjectID == projectId);
-
-                if (isProjectExists)
+                if (projectControl.IsProjectExists(projectID))
                 {
-                    var project = db.Projects.FirstOrDefault(a => a.ProjectID == projectId && a.CreatorEmail == User.Identity.Name);
 
+                    // Check if current user is admin of the project.
+                    Project project = projectControl.GetProjectByAdmin(projectID, User.Identity.Name);
+
+                    // If current user is not admin, access denied.
                     if (project == null)
                     {
                         return View("~/Views/Shared/Error.cshtml");
                     }
 
+                    // If current user is admin, return ticket create form.
                     return View();
 
                 }
@@ -49,7 +52,8 @@ namespace DistDuties.Controllers
         {
             if (ModelState.IsValid)
             {
-                TeamMate teamMate = db.TeamMates.FirstOrDefault(a => a.Email == ticket.TeamMateEmail && a.ProjectID == ticket.ProjectID);
+                // Find team mate in project with email.
+                TeamMate teamMate = projectControl.GetMateProject(ticket.ProjectID, ticket.TeamMateEmail);
 
                 if(teamMate != null)
                 {
@@ -57,8 +61,8 @@ namespace DistDuties.Controllers
                     {
                         ticket.TeamMateID = teamMate.TeamMateID;
                         ticket.Status = TaskStatus.New;
-                        db.Tickets.Add(ticket);
-                        db.SaveChanges();
+
+                        ticketControl.AddTicketSave(ticket);
 
                         return RedirectToAction("Info", "Project", new { id = ticket.ProjectID });
                     }
@@ -68,6 +72,11 @@ namespace DistDuties.Controllers
             }
 
             return View(ticket);
+        }
+
+        public ActionResult ProjectTickets()
+        {
+            return View();
         }
     }
 }
