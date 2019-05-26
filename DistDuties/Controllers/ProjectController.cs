@@ -129,7 +129,5 @@ namespace DistDuties.Controllers
 
             return RedirectToAction("Info", new { id = projectId });
         }
-
-        
     }
 }

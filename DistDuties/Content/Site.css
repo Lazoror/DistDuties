@@ -112,6 +112,11 @@ textarea {
     margin-bottom: 10px;
 }
 
+.users-list {
+    height: calc(100vh - 225px);
+    transition: all .3s;
+}
+
 .users-list ul{
     padding: 0;
 }
@@ -126,12 +131,8 @@ textarea {
 }
 
 .user-controls {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     padding: 10px;
 }
-
 
 .project-task > div {
     display: inline-block;
@@ -140,16 +141,35 @@ textarea {
 
 .project-task {
     padding: 10px;
-    background-color: #F1F1F1;
+    border-left: 6px solid #F1F1F1;
     margin-bottom: 10px;
-    border-radius: 10px;
 }
 
-.task-name span, .task-user span, .task-status span{
+    .project-task:hover {
+        border-left: 6px solid #0065B3;
+    }
+
+.project-task:hover .task-name span {
+    text-decoration: underline;
+}
+
+.task-name span {
+    color: #00518f;
+}
+
+.task-name span, .task-user span, .task-status span {
     font-weight: bold;
     font-size: 16px;
 }
 
 .task-name {
     word-break: break-word;
+}
+
+.dropdown-menu {
+    z-index: 3000;
+}
+
+.nav-controls li > a {
+    color: rgba(0, 0, 0, 0.90);
 }

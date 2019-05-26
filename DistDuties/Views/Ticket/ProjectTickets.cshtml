@@ -1,7 +1,6 @@
 ﻿@using DataAccess.Models
 
-<div class="project-tasks">
-    <p>Tickets</p>
+<div class="project-tasks sticky-top">
 
     <div class="col-md-5 d-inline-block">
         <span>Title</span>
@@ -18,9 +17,11 @@
     {
         <div class="project-task">
             <div class="col-md-5">
-                <div class="task-name">
-                    <span>@item.TicketName</span>
-                </div>
+                <a href="@Url.Action("Index", "Ticket", new { name = item.TicketName})">
+                    <div class="task-name">
+                        <span>@item.TicketName</span>
+                    </div>
+                </a>
             </div>
             <div class="col-md-2">
                 <div class="task-status">

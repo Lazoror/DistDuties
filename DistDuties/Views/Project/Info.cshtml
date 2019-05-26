@@ -7,34 +7,38 @@
 
 
 <div class="project-inner">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2 p-0">
-                <div class="project-users text-center">
-                    <p>Active users</p>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-md-2 p-0" id="sidebar">
+                <div class="project-users text-center sticky-top" id="users-sidebar">
+                    
 
-                    @RenderPage("~/Views/TeamMate/Index.cshtml")
 
-                    @if (Model.CreatorEmail == User.Identity.Name)
-                    {
-                        <div class="user-controls">
-                            <p>User controls</p>
-                            @using (Html.BeginForm("FindUser", "Manage", FormMethod.Post))
-                            {
-                                <input type="email" id="userEmail" name="email" placeholder="User email" />
+                        <p>Active users</p>
 
-                                <input type="submit" value="Add" name="userControl" />
-                                <input type="submit" value="Delete" name="userControl" />
+                        @RenderPage("~/Views/TeamMate/Index.cshtml")
 
-                                <input type="hidden" name="projectId" value="@Model.ProjectID" />
-                            }
-                        </div>
-                    }
+                        @if (Model.CreatorEmail == User.Identity.Name)
+                        {
+                            <div class="user-controls">
+                                <p>User controls</p>
+                                @using (Html.BeginForm("FindUser", "Manage", FormMethod.Post))
+                                {
+                                    <input type="email" id="userEmail" name="email" placeholder="User email" />
+
+                                    <input type="submit" value="Add" name="userControl" />
+                                    <input type="submit" value="Delete" name="userControl" />
+
+                                    <input type="hidden" name="projectId" value="@Model.ProjectID" />
+                                }
+                            </div>
+                        }
+                    
                 </div>
             </div>
             <div class="col-md-10 p-0">
 
-                <div class="project-info">
+                <div class="project-info sticky-top" id="project-info">
                     <div class="project-name">
                         <span>@Model.Name</span>
                         @if (Model.CreatorEmail == User.Identity.Name)
@@ -65,3 +69,4 @@
     @Scripts.Render("~/Scripts/user-select.js")
 }
 
+@Scripts.Render("~/Scripts/scripts.js")
