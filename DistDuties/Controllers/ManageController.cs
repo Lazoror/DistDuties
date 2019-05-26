@@ -340,7 +340,7 @@ namespace DistDuties.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult FindUser(string email, int projectId, string userControl)
+        public ActionResult FindUser(string email, Guid projectId, string userControl)
         {
             var user = UserManager.FindByEmail(email);
 

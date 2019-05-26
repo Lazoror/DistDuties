@@ -16,24 +16,43 @@ namespace DataAccess.Models
 
     }
 
+    public enum TeamMateStatus
+    {
+        Active,
+        UnActive,
+        Deleted
+    }
+
+    public enum ProjectStatus
+    {
+        Active,
+        Stopped,
+        Closed
+    }
+
     public class Project
     {
-        public int ProjectID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public Guid ProjectID { get; set; }
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
         public string CreatorEmail { get; set; }
+        public ProjectStatus ProjectStatus { get; set; }
 
         public virtual ICollection<TeamMate> TeamMates { get; set; }
     }
 
     public class TeamMate
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int TeamMateID { get; set; }
-        public string UserID { get; set; }
-        public int ProjectID { get; set; }
+        public Guid TeamMateID { get; set; }
+        public Guid UserID { get; set; }
+        public Guid ProjectID { get; set; }
         public string Email { get; set; }
+        public TeamMateStatus MateStatus { get; set; }
 
         public virtual Project Project { get; set; }
         public virtual ICollection<Ticket> Tasks { get; set; }
@@ -41,14 +60,14 @@ namespace DataAccess.Models
 
     public class Ticket
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int TicketID { get; set; }
-
+        public Guid TicketID { get; set; }
         [StringLength(60)]
         [Required]
         public string TicketName { get; set; }
-        public int ProjectID { get; set; }
-        public int TeamMateID { get; set; }
+        public Guid ProjectID { get; set; }
+        public Guid TeamMateID { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]

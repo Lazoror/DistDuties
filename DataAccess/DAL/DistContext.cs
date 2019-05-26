@@ -20,7 +20,7 @@ namespace DataAccess.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            Database.SetInitializer<DistContext>(null);
+            Database.SetInitializer<DistContext>(new CreateDatabaseIfNotExists<DistContext>());
             base.OnModelCreating(modelBuilder);
         }
     }

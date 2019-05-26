@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using DataAccess.Models;
 using DataAccess.DataControls;
+using System;
 
 namespace DistDuties.Controllers
 {
@@ -19,17 +20,16 @@ namespace DistDuties.Controllers
         }
 
         [Authorize]
-        public ActionResult Create(int? projectId)
+        public ActionResult Create(Guid projectId)
         {
-            int projectID = projectId ?? -1;
 
             if (projectId != null)
             {
-                if (projectControl.IsProjectExists(projectID))
+                if (projectControl.IsProjectExists(projectId))
                 {
 
                     // Check if current user is admin of the project.
-                    Project project = projectControl.GetProjectByAdmin(projectID, User.Identity.Name);
+                    Project project = projectControl.GetProjectByAdmin(projectId, User.Identity.Name);
 
                     // If current user is not admin, access denied.
                     if (project == null)
@@ -60,8 +60,7 @@ namespace DistDuties.Controllers
                     if (ticket.ProjectID == teamMate.ProjectID)
                     {
                         ticket.TeamMateID = teamMate.TeamMateID;
-                        ticket.Status = TaskStatus.New;
-
+                        
                         ticketControl.AddTicketSave(ticket);
 
                         return RedirectToAction("Info", "Project", new { id = ticket.ProjectID });

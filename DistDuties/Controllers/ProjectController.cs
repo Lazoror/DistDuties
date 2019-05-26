@@ -22,7 +22,7 @@ namespace DistDuties.Controllers
 
         public ProjectController()
         {
-            
+
         }
 
         [Authorize]
@@ -30,9 +30,13 @@ namespace DistDuties.Controllers
         {
             string userID = User.Identity.GetUserId();
 
+            Guid userId;
+
+            Guid.TryParse(userID, out userId);
+
             ViewBag.userID = userID;
 
-            var projects = projectControl.GetAllUserProjects(userID);
+            var projects = projectControl.GetAllUserProjects(userId);
 
 
             return View(projects);
@@ -50,52 +54,55 @@ namespace DistDuties.Controllers
         {
             if (ModelState.IsValid)
             {
+                Guid userId;
+                Guid.TryParse(User.Identity.GetUserId(), out userId);
+
                 project.CreatorEmail = User.Identity.Name;
 
                 projectControl.AddProject(project);
                 projectControl.SaveChanges();
 
-                TeamMate teamMate = mateControl.CreateMate(User.Identity.Name, project.ProjectID, User.Identity.GetUserId());
+                TeamMate teamMate = mateControl.CreateMate(User.Identity.Name, project.ProjectID, userId);
                 mateControl.AddTeamMateSave(teamMate);
             }
 
             return RedirectToAction("Index", "Project");
         }
 
+        // Gets project id.
         [Authorize]
-        public ActionResult Info(int? id)
+        public ActionResult Info(Guid id)
         {
-            int projectId = id ?? -1;
-
+            
             string userEmail = User.Identity.Name;
-            bool isUserInProject = mateControl.IsUserTeamMate(projectId, userEmail);
+            bool isUserInProject = mateControl.IsUserTeamMate(id, userEmail);
 
-           
+
             if (isUserInProject)
             {
-                Project project = projectControl.FindProjectById(projectId);
+                Project project = projectControl.FindProjectById(id);
 
-                ViewBag.temMates = projectControl.GetTeamMatesEmail(projectId);
+                ViewBag.temMates = projectControl.GetMatesActiveEmail(id);
 
                 if (project.CreatorEmail == userEmail)
                 {
-                    ViewBag.Tickets = projectControl.GetAllTickets(projectId);
+                    ViewBag.Tickets = projectControl.GetAllTickets(id);
                 }
                 else
                 {
-                    ViewBag.Tickets = projectControl.GetUserTickets(projectId, userEmail);
+                    ViewBag.Tickets = projectControl.GetUserTickets(id, userEmail);
                 }
-                
+
                 return View(project);
             }
 
-            
+
             return RedirectToAction("Index", "Project");
         }
 
 
         [Authorize]
-        public ActionResult UserControls(string email, string userId, int projectId, string userControl)
+        public ActionResult UserControls(string email, string userId, Guid projectId, string userControl)
         {
             if (!String.IsNullOrEmpty(email))
             {
@@ -104,7 +111,7 @@ namespace DistDuties.Controllers
                 {
                     Project project = projectControl.FindProjectById(projectId);
 
-                    if(project.CreatorEmail != email)
+                    if (project.CreatorEmail != email)
                     {
                         mateControl.DeleteTeamMate(email, projectId);
                     }
@@ -114,14 +121,20 @@ namespace DistDuties.Controllers
                 if (userControl == "Add")
                 {
                     TeamMate teamMateFind = projectControl.GetMateProject(projectId, email);
-                    
 
                     if (teamMateFind == null)
                     {
-                        TeamMate teamMate = mateControl.CreateMate(email, projectId, userId);
+                        Guid userIdGuid;
+                        Guid.TryParse(userId, out userIdGuid);
 
+                        TeamMate teamMate = mateControl.CreateMate(email, projectId, userIdGuid);
+                        
                         mateControl.AddTeamMateSave(teamMate);
 
+                    }
+                    else if (teamMateFind.MateStatus == TeamMateStatus.Deleted)
+                    {
+                        mateControl.UpdateMateStatus(teamMateFind, TeamMateStatus.Active);
                     }
                 }
 

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DataAccess.DataControls
 {
@@ -14,6 +14,7 @@ namespace DataAccess.DataControls
 
         public void AddTicketSave(Ticket ticket)
         {
+            ticket.Status = TaskStatus.New;
             db.Tickets.Add(ticket);
             db.SaveChanges();
         }
