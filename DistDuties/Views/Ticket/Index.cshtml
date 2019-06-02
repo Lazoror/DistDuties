@@ -1,13 +1,52 @@
-﻿
+﻿@model DataAccess.Models.Ticket
+
+@using DataAccess.Models
 @{
     ViewBag.Title = "Index";
 }
 
 <div class="container">
+
+
+
     <div class="row">
-        <h2>Index</h2>
+
+        <div class="col-md-12">
+
+            <div class="ticket-info">
+
+                @Html.ActionLink("Back to project", "Info", "Project", new { id = Model.ProjectID }, new { @class = "" })
+
+                <h2>@Model.TicketName</h2>
+
+                <div class="deadline">
+                    @ViewBag.timeLeft
+                </div>
+
+                <label>Task performer</label>
+                <p>@Model.TeamMateEmail</p>
+
+                <label>Status</label>
+                <p>@Model.Status</p>
+
+                <label>Description</label>
+                <p> @Model.Description</p>
+
+                @if (Model.Status != TicketStatus.InProgress || Model.Status != TicketStatus.Closed)
+                {
+                    @Html.ActionLink("Start", "Start", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+
+                }
+                @if (Model.Status != TicketStatus.Closed && ViewBag.admin == true)
+                {
+                    @Html.ActionLink("Close", "Close", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+                }
+                @if (Model.Status == TicketStatus.InProgress)
+                {
+                    @Html.ActionLink("Ticket is done", "CloseConfirm", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+                }
+
+            </div>
+        </div>
     </div>
 </div>
-
-
-

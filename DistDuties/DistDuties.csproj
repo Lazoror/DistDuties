@@ -179,33 +179,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905201644520_Initial.cs" />
-    <Compile Include="Migrations\201905201644520_Initial.Designer.cs">
-      <DependentUpon>201905201644520_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905201711390_ChangeProjectTaskModelName.cs" />
-    <Compile Include="Migrations\201905201711390_ChangeProjectTaskModelName.Designer.cs">
-      <DependentUpon>201905201711390_ChangeProjectTaskModelName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905201724456_ChangeTeamMateTaskIdToTicketId.cs" />
-    <Compile Include="Migrations\201905201724456_ChangeTeamMateTaskIdToTicketId.Designer.cs">
-      <DependentUpon>201905201724456_ChangeTeamMateTaskIdToTicketId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905201725583_ChangeTeamMateTaskIdToTicketIdaa.cs" />
-    <Compile Include="Migrations\201905201725583_ChangeTeamMateTaskIdToTicketIdaa.Designer.cs">
-      <DependentUpon>201905201725583_ChangeTeamMateTaskIdToTicketIdaa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.cs" />
-    <Compile Include="Migrations\201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.Designer.cs">
-      <DependentUpon>201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905201737266_DeletedPropertyFromTeamMate.cs" />
-    <Compile Include="Migrations\201905201737266_DeletedPropertyFromTeamMate.Designer.cs">
-      <DependentUpon>201905201737266_DeletedPropertyFromTeamMate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905201747227_ChangedTaskNameToTicketName.cs" />
-    <Compile Include="Migrations\201905201747227_ChangedTaskNameToTicketName.Designer.cs">
-      <DependentUpon>201905201747227_ChangedTaskNameToTicketName.cs</DependentUpon>
+    <Compile Include="Migrations\201906021004564_InitialCreate.cs" />
+    <Compile Include="Migrations\201906021004564_InitialCreate.Designer.cs">
+      <DependentUpon>201906021004564_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -314,7 +290,8 @@
     <Content Include="Views\Ticket\Index.cshtml" />
     <Content Include="Views\Ticket\Create.cshtml" />
     <Content Include="Views\TeamMate\Index.cshtml" />
-    <Content Include="Views\Ticket\ProjectTickets.cshtml" />
+    <Content Include="Views\Ticket\ActiveTickets.cshtml" />
+    <Content Include="Views\Ticket\CloseConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,33 +308,15 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905201644520_Initial.resx">
-      <DependentUpon>201905201644520_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905201711390_ChangeProjectTaskModelName.resx">
-      <DependentUpon>201905201711390_ChangeProjectTaskModelName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905201724456_ChangeTeamMateTaskIdToTicketId.resx">
-      <DependentUpon>201905201724456_ChangeTeamMateTaskIdToTicketId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905201725583_ChangeTeamMateTaskIdToTicketIdaa.resx">
-      <DependentUpon>201905201725583_ChangeTeamMateTaskIdToTicketIdaa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.resx">
-      <DependentUpon>201905201726507_ChangeTeamMateTaskIdToTicketIdaaa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905201737266_DeletedPropertyFromTeamMate.resx">
-      <DependentUpon>201905201737266_DeletedPropertyFromTeamMate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905201747227_ChangedTaskNameToTicketName.resx">
-      <DependentUpon>201905201747227_ChangedTaskNameToTicketName.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{d51f2f6e-5635-448f-ab28-19089972076e}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201906021004564_InitialCreate.resx">
+      <DependentUpon>201906021004564_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

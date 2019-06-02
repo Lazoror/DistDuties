@@ -13,8 +13,6 @@ namespace DistDuties.Controllers
         // GET: TeamMate
         public ActionResult Index()
         {
-
-
             return View();
         }
     }

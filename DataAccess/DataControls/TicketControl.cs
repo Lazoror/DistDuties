@@ -10,13 +10,35 @@ namespace DataAccess.DataControls
 {
     public class TicketControl
     {
-        private DistContext db = new DistContext();
+        private readonly DistContext db = new DistContext();
 
         public void AddTicketSave(Ticket ticket)
         {
-            ticket.Status = TaskStatus.New;
+            ticket.Status = TicketStatus.New;
             db.Tickets.Add(ticket);
             db.SaveChanges();
+        }
+
+        public Ticket GetTicketById(Guid ticketId)
+        {
+            return db.Tickets.FirstOrDefault(a => a.TicketID == ticketId);
+        }
+
+        public bool UpdateStatus(Ticket ticket, TicketStatus status)
+        {
+            if(ticket == null)
+            {
+                return false;
+            }
+            else
+            {
+                ticket.Status = status;
+                db.Entry(ticket).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                return true;
+            }
+            
         }
     }
 }

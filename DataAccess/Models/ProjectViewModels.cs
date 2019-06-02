@@ -7,7 +7,7 @@ using System.Web;
 
 namespace DataAccess.Models
 {
-    public enum TaskStatus
+    public enum TicketStatus
     {
         New,
         InProgress,
@@ -73,7 +73,9 @@ namespace DataAccess.Models
         [Required]
         [DataType(DataType.EmailAddress)]
         public string TeamMateEmail { get; set; }
-        public TaskStatus Status { get; set; }
+        public TicketStatus Status { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DeadLine { get; set; }
 
         public virtual TeamMate TeamMate { get; set; }
 

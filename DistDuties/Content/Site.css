@@ -20,7 +20,7 @@ textarea {
 
 .bg-custom {
     background-color: #FFEB00;
-    box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(59,64,69,0.1);
+    box-shadow: 0 1px 0 rgba(0,123,255, 0.15), 0 1px 6px rgba(0,123,255, 0.15);
     font-size: 16px;
 }
 
@@ -51,6 +51,7 @@ textarea {
     padding: 10px 20px;
     border-radius: 4px;
     background-color: #F5F5F5;
+    border: 1px solid #cecece;
 }
 
 .btn {
@@ -172,4 +173,18 @@ textarea {
 
 .nav-controls li > a {
     color: rgba(0, 0, 0, 0.90);
+}
+
+.ticket-info label {
+    font-weight: bold;
+}
+
+.ticket-info {
+    position: relative;
+}
+
+.deadline {
+    position: absolute;
+    top: 30px;
+    right: 0;
 }

@@ -11,7 +11,7 @@ namespace DataAccess.DataControls
 {
     public class ProjectControl
     {
-        private DistContext db = new DistContext();
+        private readonly DistContext db = new DistContext();
 
         public IEnumerable<Project> GetAllUserProjects(Guid userId)
         {
@@ -32,7 +32,7 @@ namespace DataAccess.DataControls
             db.SaveChanges();
         }
 
-        public Project FindProjectById(Guid projectId)
+        public Project GetProjectById(Guid projectId)
         {
             Project project = db.Projects.FirstOrDefault(a => a.ProjectID == projectId);
 
@@ -55,7 +55,7 @@ namespace DataAccess.DataControls
 
         public IEnumerable<Ticket> GetUserTickets(Guid projectId, string userEmail)
         {
-            var tickets = db.Projects.Where(a => a.ProjectID == projectId).Include(a => a.TeamMates).SelectMany(a => a.TeamMates).Include(a => a.Tasks).SelectMany(a => a.Tasks).Where(a => a.TeamMateEmail == userEmail);
+            var tickets = db.Projects.Where(a => a.ProjectID == projectId).Include(a => a.TeamMates).SelectMany(a => a.TeamMates).Include(a => a.Tasks).SelectMany(a => a.Tasks).Where(a => a.TeamMateEmail == userEmail && (a.Status == TicketStatus.New || a.Status == TicketStatus.InProgress));
 
             return tickets;
         }

@@ -14,7 +14,6 @@ using Microsoft.AspNet.Identity;
 namespace DistDuties.Controllers
 {
 
-    [RoutePrefix("projects")]
     public class ProjectController : Controller
     {
         private readonly ProjectControl projectControl = new ProjectControl();
@@ -30,9 +29,8 @@ namespace DistDuties.Controllers
         {
             string userID = User.Identity.GetUserId();
 
-            Guid userId;
 
-            Guid.TryParse(userID, out userId);
+            Guid.TryParse(userID, out Guid userId);
 
             ViewBag.userID = userID;
 
@@ -54,8 +52,7 @@ namespace DistDuties.Controllers
         {
             if (ModelState.IsValid)
             {
-                Guid userId;
-                Guid.TryParse(User.Identity.GetUserId(), out userId);
+                Guid.TryParse(User.Identity.GetUserId(), out Guid userId);
 
                 project.CreatorEmail = User.Identity.Name;
 
@@ -80,7 +77,7 @@ namespace DistDuties.Controllers
 
             if (isUserInProject)
             {
-                Project project = projectControl.FindProjectById(id);
+                Project project = projectControl.GetProjectById(id);
 
                 ViewBag.temMates = projectControl.GetMatesActiveEmail(id);
 
@@ -109,7 +106,7 @@ namespace DistDuties.Controllers
 
                 if (userControl == "Delete")
                 {
-                    Project project = projectControl.FindProjectById(projectId);
+                    Project project = projectControl.GetProjectById(projectId);
 
                     if (project.CreatorEmail != email)
                     {
@@ -124,8 +121,7 @@ namespace DistDuties.Controllers
 
                     if (teamMateFind == null)
                     {
-                        Guid userIdGuid;
-                        Guid.TryParse(userId, out userIdGuid);
+                        Guid.TryParse(userId, out Guid userIdGuid);
 
                         TeamMate teamMate = mateControl.CreateMate(email, projectId, userIdGuid);
                         
@@ -142,5 +138,6 @@ namespace DistDuties.Controllers
 
             return RedirectToAction("Info", new { id = projectId });
         }
+
     }
 }
