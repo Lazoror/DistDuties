@@ -24,9 +24,11 @@ namespace DataAccess.DataControls
             return db.Tickets.FirstOrDefault(a => a.TicketID == ticketId);
         }
 
-        public bool UpdateStatus(Ticket ticket, TicketStatus status)
+        public bool UpdateStatus(Guid ticketId, TicketStatus status)
         {
-            if(ticket == null)
+            Ticket ticket = GetTicketById(ticketId);
+
+            if (ticket == null)
             {
                 return false;
             }

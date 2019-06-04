@@ -70,7 +70,6 @@ namespace DataAccess.Models
         public Guid TeamMateID { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
         [DataType(DataType.EmailAddress)]
         public string TeamMateEmail { get; set; }
         public TicketStatus Status { get; set; }

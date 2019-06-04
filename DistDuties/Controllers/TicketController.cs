@@ -71,6 +71,18 @@ namespace DistDuties.Controllers
                         return View("~/Views/Shared/Error.cshtml");
                     }
 
+                    // create selectList for project teammates
+                    List<SelectListItem> mateListItems = new List<SelectListItem>();
+
+                    // add teammates to dropdown list
+                    foreach (TeamMate item in project.TeamMates)
+                    {
+                        mateListItems.Add(new SelectListItem { Text = item.Email, Value = item.Email });
+                    }
+                   
+
+                    ViewData["mates"] = mateListItems;
+
                     // If current user is admin, return ticket create form.
                     return View();
 
@@ -82,9 +94,11 @@ namespace DistDuties.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Create(Ticket ticket)
+        public ActionResult Create(Ticket ticket, string MateEmail)
         {
-            if(ModelState.IsValidField(nameof(ticket.DeadLine)) && DateTime.Now.Date > ticket.DeadLine)
+            #region addModelErrors
+
+            if (ModelState.IsValidField(nameof(ticket.DeadLine)) && DateTime.Now.Date > ticket.DeadLine)
             {
                 ModelState.AddModelError(nameof(ticket.DeadLine), "Date cannot be earlier than today");
             }
@@ -94,16 +108,20 @@ namespace DistDuties.Controllers
                 ModelState.AddModelError(nameof(ticket.DeadLine), "Date must be less than one month");
             }
 
+            #endregion
+
             if (ModelState.IsValid)
             {
+
                 // Find team mate in project with email.
-                TeamMate teamMate = projectControl.GetMateProject(ticket.ProjectID, ticket.TeamMateEmail);
+                TeamMate teamMate = projectControl.GetMateProject(ticket.ProjectID, MateEmail);
 
                 if(teamMate != null)
                 {
                     if (ticket.ProjectID == teamMate.ProjectID)
                     {
                         ticket.TeamMateID = teamMate.TeamMateID;
+                        ticket.TeamMateEmail = MateEmail;
                         
                         ticketControl.AddTicketSave(ticket);
 
@@ -117,7 +135,7 @@ namespace DistDuties.Controllers
             return View(ticket);
         }
 
-        public ActionResult CloseConfirm(Guid ticketId)
+        public ActionResult CompleteConfirm(Guid ticketId)
         {
             ViewBag.ticketId = ticketId;
 
@@ -125,7 +143,7 @@ namespace DistDuties.Controllers
         }
 
         [HttpPost]
-        public ActionResult CloseConfirm(Guid ticketId, string confirm)
+        public ActionResult CompleteConfirm(Guid ticketId, string confirm)
         {
             Ticket ticket = ticketControl.GetTicketById(ticketId);
 
@@ -133,7 +151,7 @@ namespace DistDuties.Controllers
             {
                 if (confirm == "Yes")
                 {
-                    ticketControl.UpdateStatus(ticket, TicketStatus.Completed);
+                    ticketControl.UpdateStatus(ticketId, TicketStatus.Completed);
 
                     return RedirectToAction("Info", "Project", new { id = ticket.ProjectID });
                 }
@@ -145,6 +163,20 @@ namespace DistDuties.Controllers
 
             return View("~/Views/Shared/Error.cshtml");
 
+        }
+
+        public ActionResult Start(Guid ticketId)
+        {
+            ticketControl.UpdateStatus(ticketId, TicketStatus.InProgress);
+
+            return RedirectToAction("Index", "Ticket", new { ticketId });
+        }
+
+        public ActionResult Close(Guid ticketId)
+        {
+            ticketControl.UpdateStatus(ticketId, TicketStatus.Closed);
+
+            return RedirectToAction("Index", "Ticket", new { ticketId });
         }
         
     }

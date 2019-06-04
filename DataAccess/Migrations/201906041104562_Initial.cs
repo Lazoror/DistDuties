@@ -1,9 +1,9 @@
-namespace DistDuties.Migrations
+namespace DataAccess.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -42,7 +42,7 @@ namespace DistDuties.Migrations
                         ProjectID = c.Guid(nullable: false),
                         TeamMateID = c.Guid(nullable: false),
                         Description = c.String(nullable: false),
-                        TeamMateEmail = c.String(nullable: false),
+                        TeamMateEmail = c.String(),
                         Status = c.Int(nullable: false),
                         DeadLine = c.DateTime(nullable: false),
                     })
