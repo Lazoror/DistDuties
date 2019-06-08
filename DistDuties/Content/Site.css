@@ -20,10 +20,14 @@ textarea {
 
 .bg-custom {
     background-color: #FFEB00;
-    box-shadow: 0 1px 0 rgba(0,123,255, 0.15), 0 1px 6px rgba(0,123,255, 0.15);
     font-size: 16px;
+    webkit-box-shadow: 0 0 6px rgba(25,25,34,.16);
+    box-shadow: 0 0 6px rgba(25,25,34,.16);
 }
 
+.hidden {
+    display: none;
+}
 
 
 .welcome-main {
@@ -52,6 +56,7 @@ textarea {
     border-radius: 4px;
     background-color: #F5F5F5;
     border: 1px solid #cecece;
+    margin: 0px 15px 15px 0px;
 }
 
 .btn {
@@ -95,9 +100,10 @@ textarea {
 }
 
 .project-users {
-    background-color: #F1F1F1;
-    padding: 5px 0;
-    height: calc(100vh - 56px);
+    position: relative;
+    border-right: 1px solid #eaeaea;
+    padding-top: 10px;
+    height: calc(100vh - 96px);
 }
 
 .project-users p {
@@ -106,19 +112,20 @@ textarea {
 }
 
 .project-info {
-    -webkit-box-shadow: 0px 4px 4px -4px rgba(0,0,0,0.33);
-    -moz-box-shadow: 0px 4px 4px -4px rgba(0,0,0,0.33);
-    box-shadow: 0px 4px 4px -4px rgba(0,0,0,0.33);
-    padding: 8px;
-    margin-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px;
+    z-index: 1999;
 }
 
 .users-list {
-    height: calc(100vh - 225px);
     transition: all .3s;
 }
 
-.users-list ul{
+#sidebar {
+    padding: 0px;
+}
+
+.users-list ul {
     padding: 0;
 }
 
@@ -133,6 +140,8 @@ textarea {
 
 .user-controls {
     padding: 10px;
+    position: absolute;
+    bottom: 10px;
 }
 
 .project-task > div {
@@ -140,19 +149,15 @@ textarea {
     padding-right: 20px;
 }
 
-.project-task {
-    padding: 10px;
-    border-left: 6px solid #F1F1F1;
-    margin-bottom: 10px;
+#main-controls {
+    padding-top: 10px;
 }
 
-    .project-task:hover {
-        border-left: 6px solid #0065B3;
-    }
-
-.project-task:hover .task-name span {
-    text-decoration: underline;
+.project-tasks {
+    padding: 0px 10px;
 }
+
+
 
 .task-name span {
     color: #00518f;
@@ -187,4 +192,18 @@ textarea {
     position: absolute;
     top: 30px;
     right: 0;
+}
+
+
+#userEmail {
+    max-width: 95%;
+}
+
+.project-ticket {
+    background-color: #FFFFFF;
+    padding: 10px;
+    margin-bottom: 10px;
+    webkit-box-shadow: 0 0 6px rgba(25,25,34,.16);
+    box-shadow: 0 0 6px rgba(25,25,34,.16);
+    border-radius: 4px
 }

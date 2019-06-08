@@ -34,9 +34,8 @@ namespace DistDuties.Controllers
             StringBuilder dateExpRes = new StringBuilder("");
 
             // Take DateTime from 'FLE Standard Time' timezone
-            DateTime timeUtc = DateTime.UtcNow;
-            TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("FLE Standard Time");
-            DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cstZone);
+
+            GetDate(out DateTime cstTime);
 
             // Calculate how many time left to the deadline
             TimeSpan expDate = ticket.DeadLine.AddDays(1).Subtract(cstTime);
@@ -53,6 +52,13 @@ namespace DistDuties.Controllers
             }
 
             return View("~/Views/Shared/Error.cshtml");
+        }
+
+        private void GetDate(out DateTime cstTime)
+        {
+            DateTime timeUtc = DateTime.UtcNow;
+            TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("FLE Standard Time");
+            cstTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cstZone);
         }
 
         [Authorize]
@@ -122,7 +128,8 @@ namespace DistDuties.Controllers
                     {
                         ticket.TeamMateID = teamMate.TeamMateID;
                         ticket.TeamMateEmail = MateEmail;
-                        
+                        ticket.CompleteTime = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
                         ticketControl.AddTicketSave(ticket);
 
                         return RedirectToAction("Info", "Project", new { id = ticket.ProjectID });
@@ -151,7 +158,11 @@ namespace DistDuties.Controllers
             {
                 if (confirm == "Yes")
                 {
-                    ticketControl.UpdateStatus(ticketId, TicketStatus.Completed);
+                    GetDate(out DateTime cstTime);
+
+                    ticket.CompleteTime = cstTime;
+
+                    ticketControl.UpdateStatus(ticket, TicketStatus.Completed);
 
                     return RedirectToAction("Info", "Project", new { id = ticket.ProjectID });
                 }
@@ -167,16 +178,28 @@ namespace DistDuties.Controllers
 
         public ActionResult Start(Guid ticketId)
         {
-            ticketControl.UpdateStatus(ticketId, TicketStatus.InProgress);
+            Ticket ticket = ticketControl.GetTicketById(ticketId);
 
-            return RedirectToAction("Index", "Ticket", new { ticketId });
+            GetDate(out DateTime cstTime);
+
+            ticket.CompleteTime = cstTime;
+
+            ticketControl.UpdateStatus(ticket, TicketStatus.InProgress);
+
+            return RedirectToAction("Info", "Project", new { id = ticket.ProjectID });
         }
 
         public ActionResult Close(Guid ticketId)
         {
-            ticketControl.UpdateStatus(ticketId, TicketStatus.Closed);
+            Ticket ticket = ticketControl.GetTicketById(ticketId);
 
-            return RedirectToAction("Index", "Ticket", new { ticketId });
+            GetDate(out DateTime cstTime);
+
+            ticket.CompleteTime = cstTime;
+
+            ticketControl.UpdateStatus(ticket, TicketStatus.Closed);
+
+            return RedirectToAction("Info", "Project", new { id = ticket.ProjectID });
         }
         
     }

@@ -1,39 +1,36 @@
 ﻿@using DataAccess.Models
 
-<div class="project-tasks sticky-top">
-
-    <div class="col-md-5 d-inline-block">
-        <span>Title</span>
-    </div>
-    <div class="col-md-2 d-inline-block">
-        <span>Status</span>
-    </div>
-    <div class="col-md-2 d-inline-block">
-        <span>Ticket perfomer</span>
-    </div>
-
-
-    @foreach (Ticket item in ViewBag.Tickets)
+@helper printTickets(IEnumerable<Ticket> list)
+{
+    foreach (Ticket item in list)
     {
-        <div class="project-task">
-            <div class="col-md-5">
-                <a href="@Url.Action("Index", "Ticket", new { ticketId = item.TicketID})">
-                    <div class="task-name">
-                        <span>@item.TicketName</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <div class="task-status">
-                    <span>@item.Status</span>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="task-user">
-                    <span>@item.TeamMateEmail </span>
-                </div>
-            </div>
-
+        <div class="project-ticket @item.Status">
+            @Html.ActionLink($"{@item.TicketName}", "Index", "Ticket", new { ticketId = item.TicketID}, new { })
+            <p>@item.TeamMateEmail</p>
         </div>
     }
+}
+
+
+<div class="project-tasks sticky-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <h2>New</h2>
+                @printTickets(ViewBag.NewTickets)
+            </div>
+            <div class="col-md-3">
+                <h2>In progress</h2>
+                @printTickets(ViewBag.InProgressTickets)
+            </div>
+            <div class="col-md-3">
+                <h2>Completed</h2>
+                @printTickets(ViewBag.CompletedTickets)
+            </div>
+            <div class="col-md-3">
+                <h2>Closed</h2>
+                @printTickets(ViewBag.ClosedTickets)
+            </div>
+        </div>
+    </div>
 </div>

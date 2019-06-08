@@ -6,12 +6,26 @@
 }
 
 
-<div class="project-inner">
+<div class="project-container">
     <div class="container-fluid h-100">
         <div class="row h-100">
-            <div class="col-md-2 p-0" id="sidebar">
-                <div class="project-users text-center sticky-top" id="users-sidebar">
-                    
+            <div class="col-md-12 p-0">
+                <div class="project-info sticky-top" id="project-info">
+                    <div class="project-name">
+                        <span>@Model.Name</span>
+                        @if (Model.CreatorEmail == User.Identity.Name)
+                        {
+                            <span>@Html.ActionLink("Create task", "Create", "Ticket", new { projectId = Model.ProjectID }, new { @class = "create-task-link" })</span>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            
+                <div class="col-md-2" id="sidebar">
+
+                    <div class="project-users text-center sticky-top" id="users-sidebar">
+                        <a class="btn btn-primary" href="#" id="collapse-users"></a>
 
 
                         <p>Active users</p>
@@ -33,33 +47,13 @@
                                 }
                             </div>
                         }
-                    
-                </div>
-            </div>
-            <div class="col-md-10 p-0">
 
-                <div class="project-info sticky-top" id="project-info">
-                    <div class="project-name">
-                        <span>@Model.Name</span>
-                        @if (Model.CreatorEmail == User.Identity.Name)
-                        {
-                            <span>@Html.ActionLink("Create task", "Create", "Ticket", new { projectId = Model.ProjectID }, new { @class = "create-task-link" })</span>
-                        }
                     </div>
                 </div>
-
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <p>Stats</p>
-                        </div>
-                        <div class="col-md-10">
-                            @RenderPage("~/Views/Ticket/ActiveTickets.cshtml")
-                        </div>
-                    </div>
+                <div class="col-md-10" id="main-controls">
+                    @RenderPage("~/Views/Ticket/ActiveTickets.cshtml")
                 </div>
-
-            </div>
+            
         </div>
     </div>
 </div>

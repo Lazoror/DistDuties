@@ -56,6 +56,14 @@
     <Compile Include="Migrations\201906041104562_Initial.Designer.cs">
       <DependentUpon>201906041104562_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906041302504_Added_CompleteTime_For_Ticket.cs" />
+    <Compile Include="Migrations\201906041302504_Added_CompleteTime_For_Ticket.Designer.cs">
+      <DependentUpon>201906041302504_Added_CompleteTime_For_Ticket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906041304522_Added_CompleteTime_For_Ticket2.cs" />
+    <Compile Include="Migrations\201906041304522_Added_CompleteTime_For_Ticket2.Designer.cs">
+      <DependentUpon>201906041304522_Added_CompleteTime_For_Ticket2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ProjectViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +75,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201906041104562_Initial.resx">
       <DependentUpon>201906041104562_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906041302504_Added_CompleteTime_For_Ticket.resx">
+      <DependentUpon>201906041302504_Added_CompleteTime_For_Ticket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906041304522_Added_CompleteTime_For_Ticket2.resx">
+      <DependentUpon>201906041304522_Added_CompleteTime_For_Ticket2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -73,7 +73,7 @@ namespace DistDuties.Controllers
             
             string userEmail = User.Identity.Name;
             bool isUserInProject = mateControl.IsUserTeamMate(id, userEmail);
-
+            IEnumerable<Ticket> tickets = null;
 
             if (isUserInProject)
             {
@@ -83,12 +83,17 @@ namespace DistDuties.Controllers
 
                 if (project.CreatorEmail == userEmail)
                 {
-                    ViewBag.Tickets = projectControl.GetAllTickets(id);
+                    tickets = projectControl.GetAllTickets(id);
                 }
                 else
                 {
-                    ViewBag.Tickets = projectControl.GetUserTickets(id, userEmail);
+                    tickets = projectControl.GetUserTickets(id, userEmail);
                 }
+
+                ViewBag.NewTickets = tickets.Where(a => a.Status == TicketStatus.New).ToList();
+                ViewBag.InProgressTickets = tickets.Where(a => a.Status == TicketStatus.InProgress).ToList();
+                ViewBag.CompletedTickets = tickets.Where(a => a.Status == TicketStatus.Completed).ToList();
+                ViewBag.ClosedTickets = tickets.Where(a => a.Status == TicketStatus.Closed).ToList();
 
                 return View(project);
             }

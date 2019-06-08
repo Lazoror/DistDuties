@@ -55,7 +55,7 @@ namespace DataAccess.DataControls
 
         public IEnumerable<Ticket> GetUserTickets(Guid projectId, string userEmail)
         {
-            var tickets = db.Projects.Where(a => a.ProjectID == projectId).Include(a => a.TeamMates).SelectMany(a => a.TeamMates).Include(a => a.Tasks).SelectMany(a => a.Tasks).Where(a => a.TeamMateEmail == userEmail && (a.Status == TicketStatus.New || a.Status == TicketStatus.InProgress));
+            var tickets = db.Projects.Where(a => a.ProjectID == projectId).Include(a => a.TeamMates).SelectMany(a => a.TeamMates).Include(a => a.Tasks).SelectMany(a => a.Tasks).Where(a => a.TeamMateEmail == userEmail);
 
             return tickets;
         }

@@ -15,13 +15,28 @@
 
             <div class="ticket-info">
 
-                @Html.ActionLink("Back to project", "Info", "Project", new { id = Model.ProjectID }, new { @class = "" })
+
 
                 <h2>@Model.TicketName</h2>
 
                 <div class="deadline">
                     @ViewBag.timeLeft
                 </div>
+                @if (Model.CompleteTime > new DateTime(2018, 1, 1))
+                {
+                    <div class="ticket-time">
+                        @if (Model.Status == TicketStatus.InProgress)
+                        {
+                            <span>Start time: </span>
+                        }
+                        else if (Model.Status == TicketStatus.Completed)
+                        {
+                            <span>End time: </span>
+                        }
+
+                        <span>@Model.CompleteTime</span>
+                    </div>
+                }
 
                 <label>Task performer</label>
                 <p>@Model.TeamMateEmail</p>
@@ -32,20 +47,34 @@
                 <label>Description</label>
                 <p> @Model.Description</p>
 
-                @if (Model.Status != TicketStatus.InProgress && Model.Status != TicketStatus.Closed)
-                {
-                    @Html.ActionLink("Start", "Start", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
 
-                }
-                @if (Model.Status != TicketStatus.Closed && ViewBag.admin == true)
+                @switch (Model.Status)
                 {
-                    @Html.ActionLink("Close", "Close", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
-                }
-                @if (Model.Status == TicketStatus.InProgress)
-                {
-                    @Html.ActionLink("Ticket is done", "CompleteConfirm", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+                    case TicketStatus.InProgress:
+                        if (ViewBag.admin == true)
+                        {
+                            @Html.ActionLink("Close", "Close", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+                        }
+                        @Html.ActionLink("Ticket is done", "CompleteConfirm", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+
+                        break;
+                    case TicketStatus.New:
+                        if (ViewBag.admin == true)
+                        {
+                            @Html.ActionLink("Close", "Close", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+                        }
+                        @Html.ActionLink("Start", "Start", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+                        break;
+                    case TicketStatus.Completed:
+                        if (ViewBag.admin == true)
+                        {
+                            @Html.ActionLink("Start", "Start", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+                            @Html.ActionLink("Close", "Close", "Ticket", new { ticketId = Model.TicketID }, new { @class = "btn btn-custom" })
+                        }
+                        break;
                 }
 
+                @Html.ActionLink("Back to project", "Info", "Project", new { id = Model.ProjectID }, new { @class = "btn btn-custom d-block" })
             </div>
         </div>
     </div>

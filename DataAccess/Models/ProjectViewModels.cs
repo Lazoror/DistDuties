@@ -9,8 +9,8 @@ namespace DataAccess.Models
 {
     public enum TicketStatus
     {
-        New,
         InProgress,
+        New,
         Completed,
         Closed
 
@@ -75,6 +75,8 @@ namespace DataAccess.Models
         public TicketStatus Status { get; set; }
         [DataType(DataType.Date)]
         public DateTime DeadLine { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime CompleteTime { get; set; }
 
         public virtual TeamMate TeamMate { get; set; }
 
